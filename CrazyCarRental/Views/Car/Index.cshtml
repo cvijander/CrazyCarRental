@@ -1,0 +1,47 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<CrazyCarRental.Models.Car>
+
+    <h1>Available cars</h1>
+
+    <form  >
+        <div>
+            <label for="model">Model</label>
+            <input type="text" id="model" name="model"   />
+        </<div>
+            <label for="make">Make</label>
+            <input type="text" id="make" name="make"  />
+        </div>
+
+        <button type="submit" class="btn btn-primary" >Search </button>
+
+        
+    </form>
+
+    <div>
+        @foreach (var car in Model)
+       {
+        <div class="car-card">
+            <h2>@car.Make  @car.Model</h2>
+            <p>Price per day : @car.PricePerDay </p>
+            <p>@(car.isAvaliable ? "Available" : "Not Available")</p>
+            <a href="@Url.Action("Details", "Car",new {id = car.CarId }  )">Details</a> 
+            
+        </div>
+     }
+</div>
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Car id</th>
+            <th>Name</th>
+            <th>Model</th>
+        </tr>
+
+    </thead>
+</table>

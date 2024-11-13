@@ -1,0 +1,30 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model CrazyCarRental.Models.Car;
+
+<h1>@Model.Make  @Model.Model</h1>
+
+<div class="car-details">
+    <h3>Specification</h3>
+
+    <ul>
+        <li>Make:  @Model.Make</li>
+        <li>Model: @Model.Model</li>
+        <li>Year   @Model.Year</li>
+    </ul>
+</div>
+
+@if(Model.isAvaliable)
+{
+    <form asp-action="Book" asp-controller="Booking" method="post">
+        <input type="hidden" name="CarId" value="@Model.CarId" />
+        <button type="submit" class="btn btn-primary">Book this car</button>
+    </form>
+}
+else
+{
+    <p>This car is currently unavailabel for booking.</p>
+}
