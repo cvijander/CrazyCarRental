@@ -1,30 +1,40 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model CrazyCarRental.Models.Car;
+
 @{
+    ViewData["Title"] = $"{Model.Make} {Model.Model} Details";
 }
-@model CrazyCarRental.Models.Car;
+
 
 <h1>@Model.Make  @Model.Model</h1>
 
 <div class="car-details">
+    <img src="~/images/cars/@Model.ImageUrl" alt="@Model.Make @Model.Model" style="max-width:100%; height:auto;" />
+
+    <p><strong>Price per day:</strong> @Model.PricePerDay euros</p>
+    <p><strong>Availability: </strong> @(Model.isAvaliable ? " Available" : "Currently Unavailable")</p>
+
     <h3>Specification</h3>
 
     <ul>
-        <li>Make:  @Model.Make</li>
-        <li>Model: @Model.Model</li>
-        <li>Year   @Model.Year</li>
+        <li><strong>Make:</strong>  @Model.Make</li>
+        <li><strong>Model: </strong> @Model.Model</li>
+        <li><strong>Year: </strong>   @Model.Year</li>
+        <li><strong> Fule type:</strong> @Model.FuelType </li>
+        <li><strong> Seats:</strong> @Model.Seats</li>
     </ul>
+
+    @if (Model.isAvaliable)
+    {
+        <form asp-action="Book" asp-controller="Booking" method="post">
+            <input type="hidden" name="CarId" value="@Model.CarId" />
+            <button type="submit" class="btn btn-primary">Book this car</button>
+        </form>
+    }
+    else
+    {
+        <p>This car is currently unavailabel for booking.</p>
+    }
+    <a href="@Url.Action("Index", "Car")">Back to cars</a>
+
 </div>
 
-@if(Model.isAvaliable)
-{
-    <form asp-action="Book" asp-controller="Booking" method="post">
-        <input type="hidden" name="CarId" value="@Model.CarId" />
-        <button type="submit" class="btn btn-primary">Book this car</button>
-    </form>
-}
-else
-{
-    <p>This car is currently unavailabel for booking.</p>
-}

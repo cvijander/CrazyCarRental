@@ -23,13 +23,41 @@ body {
 
 .footer {
     background-color: #169A5A;
+    max-height:130px
+}
+.container-fluid {
+    background-color: #169A5A;
+    
+}
+
+.container-fluid  {
+    color:white
 }
 
 .footer-text {
-    color:white;
+    padding:10px 0;
 }
 
+.footer img {
+    max-height: 50px;
+}
+.footer-text, li a {
+    color: white;
+   
+}
+.footer ul 
+{
+    margin-bottom:0;
+    padding-left:0;
+}
+
+.footer li
+{
+    margin-bottom:5px;
+}
 .footer-copy 
 {
+    padding: 5px 0;
     text-align:center
+    
 }

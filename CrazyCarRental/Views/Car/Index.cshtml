@@ -3,41 +3,42 @@
 
     <h1>Available cars</h1>
 
-    <form  >
-        <div>
-            <label for="model">Model</label>
-            <input type="text" id="model" name="model"   />
-        </<div>
-            <label for="make">Make</label>
-            <input type="text" id="make" name="make"  />
-        </div>
+    <form asp-action="Index" method="get" class="search-form">
+        <label for="make">Make:</label>
+        <input type="text" name="make" id="make" value="@Context.Request.Query["make"]"/>
 
+        <label for="model">Model:</label>
+        <input type="text" name="model" id="model" value="@Context.Request.Query["model"]"/>
+
+        <label for="minPrice">Min Price:</label>
+        <input type="number" name="minPrice" id="minPrice" step="0.01" value="@Context.Request.Query["minPrice"]"/>
+
+        <label for="maxPrice">Max price</label>
+        <input type="number" name="maxPrice" id="maxPrice" step="0.01" value="@Context.Request.Query["maxPrice"]"/>
+            
+        
         <button type="submit" class="btn btn-primary" >Search </button>
-
         
     </form>
 
-    <div>
-        @foreach (var car in Model)
-       {
+<div>
+     @foreach (var car in Model)
+     {
         <div class="car-card">
             <h2>@car.Make  @car.Model</h2>
-            <p>Price per day : @car.PricePerDay </p>
+            <p>Price per day : @car.PricePerDay euro </p>
             <p>@(car.isAvaliable ? "Available" : "Not Available")</p>
-            <a href="@Url.Action("Details", "Car",new {id = car.CarId }  )">Details</a> 
-            
+            <a href="@Url.Action("Details", "Car",new {id = car.CarId })">View Details</a>             
         </div>
      }
 </div>
 
 
-<table>
-    <thead>
-        <tr>
-            <th>Car id</th>
-            <th>Name</th>
-            <th>Model</th>
-        </tr>
-
-    </thead>
-</table>
+<style>
+    .car-card {
+        border: 1px solid #ddd;
+        padding:15px;
+        margin:10px 0;
+        background-color: #f9f9f9;
+    }
+</style>

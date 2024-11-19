@@ -15,7 +15,7 @@
 
         public int Seats { get; set; }
 
-        public string FuleType { get; set; }
+        public string FuelType { get; set; }
         public string ImageUrl { get; set; }
     }
 }
