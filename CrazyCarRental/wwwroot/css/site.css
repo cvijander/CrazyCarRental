@@ -20,3 +20,16 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.footer {
+    background-color: #169A5A;
+}
+
+.footer-text {
+    color:white;
+}
+
+.footer-copy 
+{
+    text-align:center
+}
