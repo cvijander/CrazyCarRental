@@ -28,7 +28,7 @@ namespace CrazyCarRental.Controllers
 
             if (!(minPrice == null || minPrice == 0))
             {
-                cars = cars.Where(c => c.PricePerDay <= minPrice);
+                cars = cars.Where(c => c.PricePerDay <= maxPrice);
             }
 
 
