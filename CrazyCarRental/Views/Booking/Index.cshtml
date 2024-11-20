@@ -7,3 +7,51 @@
 @model IEnumerable<CrazyCarRental.Models.Booking>
 
 <h1>Greating from Bokoing view </h1>
+
+
+     <h2>Available cars</h2>
+
+     <form asp-action="Index" method="get" class="search-form">
+         <label for="make">Make:</label>
+         <input type="text" name="make" id="make" value="@Context.Request.Query["make"]"/>
+
+         <label for="model">Model:</label>
+         <input type="text" name="model" id="model" value="@Context.Request.Query["model"]"/>
+
+         <label for="minPrice">Min Price:</label>
+         <input type="number" name="minPrice" id="minPrice" step="0.01" value="@Context.Request.Query["minPrice"]"/>
+
+         <label for="maxPrice">Max price</label>
+         <input type="number" name="maxPrice" id="maxPrice" step="0.01" value="@Context.Request.Query["maxPrice"]"/>
+            
+        
+         <button type="submit" class="btn btn-primary" >Search </button>
+        
+     </form>
+
+<div>
+     @foreach (Booking  booking in Model)
+     {
+        <div class="booking-card">
+            <h2><strong>Car id</strong> @booking.CarId  </h2>
+            <h2><strong>User Id</strong> @booking.UserId  </h2>
+            <h2><strong>Boking id</strong>@booking.Id  </h2>
+            <p><strong>Start date :</strong>  @booking.StartDate </p>
+            <p><strong>End date :</strong> @booking.EndDate </p>
+            <p><strong>Price per day :</strong> @booking.TotalPrice </p>
+            <p><strong>PDV :</strong> @booking.Pdv </p>
+           
+                      
+        </div>
+     }
+</div>
+
+
+<style>
+    .booking-card {
+        border: 1px solid #ddd;
+        padding:15px;
+        margin:10px 0;
+        background-color: #f9f9f9;
+    }
+</style>

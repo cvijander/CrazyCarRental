@@ -13,12 +13,12 @@ namespace CrazyCarRental.Controllers
 
             if(!(make == null || make ==""))
             {
-                cars = cars.Where(c => c.Make == make);
+                cars = cars.Where(c => c.Make.ToLower() == make.ToLower().Trim());
             }
 
             if (!(model == null || model == ""))
             {
-                cars = cars.Where(c => c.Model == model);
+                cars = cars.Where(c => c.Model.ToLower() == model.ToLower().Trim());
             }
 
             if (!(minPrice == null || minPrice == 0))
@@ -26,7 +26,7 @@ namespace CrazyCarRental.Controllers
                 cars = cars.Where(c => c.PricePerDay >= minPrice);
             }
 
-            if (!(minPrice == null || minPrice == 0))
+            if (!(maxPrice == null || maxPrice == 0))
             {
                 cars = cars.Where(c => c.PricePerDay <= maxPrice);
             }
@@ -41,7 +41,7 @@ namespace CrazyCarRental.Controllers
         public IActionResult Details(int id)
         {
             var cars = InitCars();
-            var car = cars.FirstOrDefault(x => x.CarId == id);
+            var car = cars.SingleOrDefault(x => x.CarId == id);
 
             if (car == null) return NotFound();
                         

@@ -5,10 +5,11 @@ namespace CrazyCarRental.Controllers
 {
     public class BookingController : Controller
     {
+        
         public IActionResult Index()
         {
-            
-            return View();
+            var bookings  = InitListsBookings();
+            return View(bookings);
         }
 
         [HttpGet]
@@ -33,7 +34,7 @@ namespace CrazyCarRental.Controllers
             return View();
         }
 
-        private IEnumerable<Booking> lists()
+        private IEnumerable<Booking> InitListsBookings()
         {
             List<Booking> listOfBookings = new List<Booking>();
             listOfBookings.Add(new Booking
@@ -71,6 +72,41 @@ namespace CrazyCarRental.Controllers
 
             return listOfBookings;
         } 
+
+        private IEnumerable<Car> InitCars()
+        {
+            var listOfCars = new List<Car>();
+            listOfCars.Add(new Car
+            {
+                CarId = 1,
+                Make = "VW",
+                Model = "Golf",
+                PricePerDay = 10.5M,
+                isAvaliable = true,
+                ImageUrl = "golf_1_gti.jpg"
+
+            });
+            listOfCars.Add(new Car
+            {
+                CarId = 2,
+                Make = "Audi",
+                Model = "100",
+                PricePerDay = 30M,
+                isAvaliable = false,
+                ImageUrl = "audi_100_2.jpg"
+
+            });
+            listOfCars.Add(new Car
+            {
+                CarId = 3,
+                Make = "Toyota",
+                Model = "Corola",
+                PricePerDay = 20M,
+
+            });
+
+            return listOfCars;
+        }
         
 
         
