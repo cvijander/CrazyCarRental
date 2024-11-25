@@ -1,6 +1,10 @@
 ﻿
 @model IEnumerable<CrazyCarRental.Models.Car>
 
+@{
+    ViewData["Title"] = "View a list of Cars";
+}
+
     <h1>Available cars</h1>
 
     <form asp-action="Index" method="get" class="search-form">
@@ -21,16 +25,23 @@
         
     </form>
 
+ <div>
+      @foreach (Car car in Model)
+      {
+         <div class="car-card">
+             <h2>@car.Make  @car.Model</h2>
+             <p>Price per day : @car.PricePerDay euro </p>
+             <p>@(car.IsAvailable ? "Available" : "Not Available")</p>
+             <a href="@Url.Action("Details", "Car",new {id = car.CarId })">View Details</a>             
+         </div>
+      }
+ </div>
+
 <div>
-     @foreach (Car car in Model)
-     {
-        <div class="car-card">
-            <h2>@car.Make  @car.Model</h2>
-            <p>Price per day : @car.PricePerDay euro </p>
-            <p>@(car.isAvaliable ? "Available" : "Not Available")</p>
-            <a href="@Url.Action("Details", "Car",new {id = car.CarId })">View Details</a>             
-        </div>
-     }
+    @foreach (var car in Model)
+    {
+        @await Html.PartialAsync("_CarCard",car)
+    }
 </div>
 
 

@@ -57,7 +57,7 @@ namespace CrazyCarRental.Controllers
                 Make = "VW",
                 Model = "Golf",
                 PricePerDay = 10.5M,
-                isAvaliable = true,
+                IsAvailable = true,
                 ImageUrl = "golf_1_gti.jpg"
 
             });
@@ -67,7 +67,7 @@ namespace CrazyCarRental.Controllers
                 Make = "Audi",
                 Model = "100",
                 PricePerDay = 30M,
-                isAvaliable = false,
+                IsAvailable = false,
                 ImageUrl = "audi_100_2.jpg"
 
             });

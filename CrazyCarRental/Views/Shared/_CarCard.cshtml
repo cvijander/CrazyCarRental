@@ -1,0 +1,27 @@
+﻿
+
+@model CrazyCarRental.Models.Car
+
+<div class="car-card">
+    <div class="car-detail">
+        <h3>@Model.Make  @Model.Model</h3>
+        <p><strong>Price per day</strong> $@Model.PricePerDay</p>
+        <p><strong>Availibility</strong> @(Model.IsAvailable ?"Available" : "NotAvailable")</p>
+        <h3>Specification</h3>
+
+        <ul>
+            <li><strong>Make:</strong>  @Model.Make</li>
+            <li><strong>Model: </strong> @Model.Model</li>
+            <li><strong>Year: </strong>   @Model.Year</li>
+            <li><strong> Fuel type:</strong> @Model.FuelType </li>
+            <li><strong> Seats:</strong> @Model.Seats</li>
+            <img src="~/images/cars/@Model.ImageUrl" alt="@Model.Make @Model.Model" style="max-width:350px; height:auto;" />
+        </ul>
+        
+    </div>
+
+</div>
+
+
+
+

@@ -1,4 +1,5 @@
 ﻿using CrazyCarRental.Models;
+using CrazyCarRental.Util;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrazyCarRental.Controllers
@@ -6,72 +7,97 @@ namespace CrazyCarRental.Controllers
     public class BookingController : Controller
     {
         
-        public IActionResult Index()
+        public async Task<IActionResult>Create(int carId, int userId)
         {
-            var bookings  = InitListsBookings();
-            return View(bookings);
-        }
+            IEnumerable<Car> cars = Garage.GenerateCars();
 
-        [HttpGet]
-        public IActionResult Book(int id)
-        {
-            return View();
+            Car car = cars.Single(x => x.CarId == carId);
+
+
+            if(car == null || !car.IsAvailable)
+            {
+                return NotFound("The car is not available for booking");
+            }
+
+            
+            return View(new Booking { BookingId=1, CarId = carId, Car = car, StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1),TotalPrice = car.PricePerDay  });
         }
 
         [HttpPost]
-        public IActionResult Book(Booking booking)
+        [ValidateAntiForgeryToken]
+
+        public async Task< IActionResult> Create(Booking booking)
+        {
+            IEnumerable<Car> cars = Garage.GenerateCars();
+
+            Car car = cars.SingleOrDefault(x => x.CarId == booking.CarId);
+
+            if(car == null || !car.IsAvailable )
+            {
+                return NotFound("The car is not available for booking");
+            }
+
+            var rentalDays = (booking.EndDate - booking.StartDate).Days;
+            booking.TotalPrice = rentalDays * car.PricePerDay;
+
+            if (ModelState.IsValid)
+            {
+                return RedirectToAction("Confirmation", new { bookingId = booking.BookingId });
+            }
+            return View(booking);
+        }
+
+        [HttpPost]
+        public IActionResult Booking(Booking booking)
         {
             return View(booking);
         }
 
-        public IActionResult Confirmacion()
+        public async Task<IActionResult> Confirmation(int bookingId)
+        {
+            IEnumerable<Booking> bookings = Garage.GenerateBookings();
+            Booking booking = bookings.SingleOrDefault(x => x.BookingId == bookingId);
+
+            if (booking == null) 
+
+               {
+                 return NotFound();
+               }
+
+            booking.Car = InitCars().SingleOrDefault(x=> x.CarId == booking.CarId);
+
+            return View(booking);
+        }
+
+        public IActionResult History()
         {
             return View();
         }
 
-        public IActionResult ListOfPrevoius()
+        private IEnumerable<Booking> GenerateBookings()
         {
-            return View();
-        }
-
-        private IEnumerable<Booking> InitListsBookings()
-        {
-            List<Booking> listOfBookings = new List<Booking>();
-            listOfBookings.Add(new Booking
+            var bookings = new List<Booking>();
+            bookings.Add(new Booking
             {
-                Id = 1,
+                BookingId = 1,
                 CarId = 1,
                 UserId = 1,
-                StartDate = new DateTime(2024, 12, 1),
-                EndDate = new DateTime(2024,12,12),
-                TotalPrice = 100,
-                Pdv = 20,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(1),
+                TotalPrice = 10.5M,
             });
-
-            listOfBookings.Add(new Booking
+            bookings.Add(new Booking
             {
-                Id = 2,
+                BookingId = 2,
                 CarId = 2,
                 UserId = 1,
-                StartDate = new DateTime(2024, 10, 1),
-                EndDate = new DateTime(2024, 10, 12),
-                TotalPrice = 150,
-                Pdv = 20,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now.AddDays(1),
+                TotalPrice = 300,
             });
 
-            listOfBookings.Add(new Booking
-            {
-                Id = 3,
-                CarId = 3,
-                UserId = 1,
-                StartDate = new DateTime(2024, 08, 08),
-                EndDate = new DateTime(2024, 10, 10),
-                TotalPrice = 80,
-                Pdv = 20,
-            });
-
-            return listOfBookings;
-        } 
+            return bookings;
+        }
 
         private IEnumerable<Car> InitCars()
         {
@@ -82,7 +108,7 @@ namespace CrazyCarRental.Controllers
                 Make = "VW",
                 Model = "Golf",
                 PricePerDay = 10.5M,
-                isAvaliable = true,
+                IsAvailable = true,
                 ImageUrl = "golf_1_gti.jpg"
 
             });
@@ -92,7 +118,7 @@ namespace CrazyCarRental.Controllers
                 Make = "Audi",
                 Model = "100",
                 PricePerDay = 30M,
-                isAvaliable = false,
+                IsAvailable = false,
                 ImageUrl = "audi_100_2.jpg"
 
             });
@@ -111,25 +137,6 @@ namespace CrazyCarRental.Controllers
 
         
     }
-    /*
-    public int Id { get; set; }
-
-    public int CarId { get; set; }
-
-    public Car selectedCar { get; set; }
-
-    public int UserId { get; set; }
-
-    public User selectedUser { get; set; }
-
-    public DateTime StartDate { get; set; }
-
-    public DateTime EndDate { get; set; }
-
-    public decimal TotalPrice { get; set; }
-
-    public decimal Pdv { get; set; }
-
-    */
+    
 
 }

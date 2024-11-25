@@ -9,7 +9,7 @@
 
         public decimal PricePerDay { get; set; }
 
-        public bool isAvaliable { get;set; }
+        public bool IsAvailable { get;set; }
 
         public int Year { get; set; }
 

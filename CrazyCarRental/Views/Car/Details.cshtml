@@ -11,7 +11,7 @@
     <img src="~/images/cars/@Model.ImageUrl" alt="@Model.Make @Model.Model" style="max-width:100%; height:auto;" />
 
     <p><strong>Price per day:</strong> @Model.PricePerDay euros</p>
-    <p><strong>Availability: </strong> @(Model.isAvaliable ? " Available" : "Currently Unavailable")</p>
+    <p><strong>Availability: </strong> @(Model.IsAvailable ? " Available" : "Currently Unavailable")</p>
 
     <h3>Specification</h3>
 
@@ -23,10 +23,11 @@
         <li><strong> Seats:</strong> @Model.Seats</li>
     </ul>
 
-    @if (Model.isAvaliable)
+    @if (Model.IsAvailable)
     {
-        <form asp-action="Book" asp-controller="Booking" method="post">
+        <form asp-action="Create" asp-controller="Booking" method="get">
             <input type="hidden" name="CarId" value="@Model.CarId" />
+            <input type="hidden" name="UserId" value="1"/>
             <button type="submit" class="btn btn-primary">Book this car</button>
         </form>
     }
