@@ -1,4 +1,5 @@
 ﻿using CrazyCarRental.Models;
+using CrazyCarRental.Util;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CrazyCarRental.Controllers
@@ -7,26 +8,26 @@ namespace CrazyCarRental.Controllers
     {
         public IActionResult Index(string make, string model, decimal? minPrice, decimal? maxPrice)
         {
-            var cars = InitCars();
+            var cars = Garage.GenerateCars();
 
            // cars = cars.Where(c => c.Make == make && c.Model == model);
 
-            if(!(make == null || make ==""))
+            if(make != null)
             {
                 cars = cars.Where(c => c.Make.ToLower() == make.ToLower().Trim());
             }
 
-            if (!(model == null || model == ""))
+            if (model != null )
             {
                 cars = cars.Where(c => c.Model.ToLower() == model.ToLower().Trim());
             }
 
-            if (!(minPrice == null || minPrice == 0))
+            if (minPrice > 0)
             {
                 cars = cars.Where(c => c.PricePerDay >= minPrice);
             }
 
-            if (!(maxPrice == null || maxPrice == 0))
+            if (maxPrice > 0 )
             {
                 cars = cars.Where(c => c.PricePerDay <= maxPrice);
             }
@@ -40,7 +41,7 @@ namespace CrazyCarRental.Controllers
 
         public IActionResult Details(int id)
         {
-            var cars = InitCars();
+            var cars = Garage.GenerateCars();
             var car = cars.SingleOrDefault(x => x.CarId == id);
 
             if (car == null) return NotFound();

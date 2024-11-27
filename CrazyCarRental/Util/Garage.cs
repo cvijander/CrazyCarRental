@@ -14,7 +14,7 @@ namespace CrazyCarRental.Util
                 Model = "Lancer Evo VI",
                 Year = 1999,
                 PricePerDay = 224.5m,
-                ImageUrl = "mitsubishi-evo-6-1999.jpg",
+                ImageUrl = "Mitsubishi_Evo_6_1999.jpg",
                 Seats = 5,
                 IsAvailable = true
 
@@ -30,7 +30,7 @@ namespace CrazyCarRental.Util
                 Year = 2006,
                 PricePerDay = 213.98m,
                 Seats = 5,
-                ImageUrl = "subary-impreza-wrx-sti-2006.jpg",
+                ImageUrl = "Subaru_Impreza_WRX_STI_2006.jpg",
                 IsAvailable = true
             };
 
@@ -44,7 +44,7 @@ namespace CrazyCarRental.Util
                 Year = 1992,
                 PricePerDay = 350.78m,
                 Seats = 5,
-                ImageUrl = "lancia.jpg",
+                ImageUrl = "Lancia_Delta_HF_Integrale_1992.jpg",
                 IsAvailable = false
             };
             
@@ -60,7 +60,7 @@ namespace CrazyCarRental.Util
                 Year = 1994,
                 PricePerDay = 120.0m,
                 Seats = 5,
-                ImageUrl = "/images/toyota_supra_mk4.jpg",
+                ImageUrl = "Toyota_Supra_MK4.jpg",
                 IsAvailable = true
             };
 
@@ -75,7 +75,7 @@ namespace CrazyCarRental.Util
                 Year = 1999,
                 PricePerDay = 140.0m,
                 Seats = 5,
-                ImageUrl = "/images/nissan_skyline_r34.jpg",
+                ImageUrl = "Nissan_Skyline_R34.jpg",
                 IsAvailable = true
 
             };
@@ -92,7 +92,7 @@ namespace CrazyCarRental.Util
                 PricePerDay = 100.0m,
                 IsAvailable = true,
                 Seats = 5,
-                ImageUrl = "/images/mitsubishi_evo_vi.jpg"
+                ImageUrl = "Mitsubishi_Evo_VI_Blue.jpg"
             };
 
             cars.Add(mitsubishiLancer);
@@ -107,7 +107,7 @@ namespace CrazyCarRental.Util
                 PricePerDay = 110.0m,
                 IsAvailable = false,
                 Seats = 2,
-                ImageUrl = "/images/mazda_rx7_fd.jpg"
+                ImageUrl = "Red_Mazda_RX7_FD.jpg"
             };
 
             cars.Add(mazdaRx7);
@@ -122,7 +122,7 @@ namespace CrazyCarRental.Util
                 PricePerDay = 150.0m,
                 IsAvailable = true,
                 Seats = 2,
-                ImageUrl = "/images/honda_nsx.jpg"
+                ImageUrl = "Honda_NSX.jpg"
             };
 
             cars.Add(hondaNSX);
@@ -137,7 +137,7 @@ namespace CrazyCarRental.Util
                 PricePerDay = 90.0m,
                 IsAvailable = true,
                 Seats = 5,
-                ImageUrl = "/images/toyota_celica_gtfour.jpg"
+                ImageUrl = "Toyota_Celica_GT-Four.jpg"
             };
 
             cars.Add(toyotaCelica);
@@ -152,7 +152,7 @@ namespace CrazyCarRental.Util
                 PricePerDay = 80.0m,
                 IsAvailable = true,
                 Seats = 2,
-                ImageUrl = "/images/mazda_mx5_miata.jpg"
+                ImageUrl = "Mazda_MX5_Miata.jpg"
             };
 
             cars.Add(mazdaMiata);
@@ -166,7 +166,7 @@ namespace CrazyCarRental.Util
                 PricePerDay = 70.0m,
                 IsAvailable = true,
                 Seats = 5,
-                ImageUrl = "/images/honda_civic_ek9.jpg"
+                ImageUrl = "Honda_Civic_EK9.jpg"
             };
 
             cars.Add(hondaCivicR);
@@ -181,7 +181,7 @@ namespace CrazyCarRental.Util
                 PricePerDay = 85.0m,
                 IsAvailable = false,
                 Seats = 2,
-                ImageUrl = "/images/nissan_300zx.jpg"
+                ImageUrl = "Nissan_300ZX.jpg"
             };
 
             cars.Add(nissan300);
@@ -195,7 +195,7 @@ namespace CrazyCarRental.Util
                 PricePerDay = 100.0m,
                 IsAvailable = true,
                 Seats = 5,
-                ImageUrl = "/images/mitsubishi_3000gt.jpg"
+                ImageUrl = "Mitsubishi_3000GT.jpg"
             };
 
             cars.Add(mitshubishi3000gt);
@@ -210,7 +210,7 @@ namespace CrazyCarRental.Util
                 PricePerDay = 130.0m,
                 IsAvailable = true,
                 Seats = 5,
-                ImageUrl = "/images/bmw_m3_e36.jpg"
+                ImageUrl = "BMW_M3_E36.jpg"
             };
 
             cars.Add(bmwM3);
@@ -225,7 +225,7 @@ namespace CrazyCarRental.Util
                 PricePerDay = 140.0m,
                 IsAvailable = true,
                 Seats = 5,
-                ImageUrl = "/images/ford_mustang_svt_cobra.jpg"
+                ImageUrl = "Ford_Mustang_SVT_Cobra.jpg"
             };
 
             cars.Add(fordMustang);
@@ -239,7 +239,7 @@ namespace CrazyCarRental.Util
                 PricePerDay = 95.0m,
                 IsAvailable = true,
                 Seats = 2,
-                ImageUrl = "/images/toyota_mr2.jpg"
+                ImageUrl = "Toyota_MR2.jpg"
             };
 
             cars.Add(toyotaMr2);
@@ -254,7 +254,7 @@ namespace CrazyCarRental.Util
                 PricePerDay = 80.0m,
                 IsAvailable = false,
                 Seats = 5,
-                ImageUrl = "/images/vw_corrado_vr6.jpg"
+                ImageUrl = "VW_Corrado_VR6.jpg"
             };
 
             cars.Add(volkswagenCorrado);

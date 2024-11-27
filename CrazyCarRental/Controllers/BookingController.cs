@@ -37,11 +37,31 @@ namespace CrazyCarRental.Controllers
                 return NotFound("The car is not available for booking");
             }
 
-            var rentalDays = (booking.EndDate - booking.StartDate).Days;
-            booking.TotalPrice = rentalDays * car.PricePerDay;
+            if(booking.StartDate <= DateTime.Now)
+            {
+                ModelState.AddModelError(nameof(booking.StartDate),"Start date must be in the future");
+            }
+
+            if(booking.EndDate < booking.StartDate)
+            {
+                ModelState.AddModelError(nameof(booking.EndDate), "End date must be aftter the start date");
+            }
+
+
+            
+
+           
 
             if (ModelState.IsValid)
             {
+                int rentalDays = (booking.EndDate - booking.StartDate).Days;
+                booking.TotalPrice = rentalDays * car.PricePerDay;
+
+                if(booking.TotalPrice <= 0)
+                {
+                    ModelState.AddModelError(nameof(booking.TotalPrice), "Total price must be greather than 0");
+                }
+
                 return RedirectToAction("Confirmation", new { bookingId = booking.BookingId });
             }
             return View(booking);
@@ -69,9 +89,17 @@ namespace CrazyCarRental.Controllers
             return View(booking);
         }
 
-        public IActionResult History()
+        public IActionResult History(int userId)
         {
-            return View();
+            var bookings = Garage.GenerateBookings();
+            bookings = bookings.Where(b => b.UserId == userId);
+
+            if (bookings == null)
+            {
+                return NotFound();
+            }
+
+            return View(bookings);
         }
 
         private IEnumerable<Booking> GenerateBookings()

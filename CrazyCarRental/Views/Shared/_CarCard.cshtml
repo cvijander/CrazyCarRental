@@ -1,27 +1,49 @@
-﻿
-
-@model CrazyCarRental.Models.Car
+﻿@model CrazyCarRental.Models.Car
 
 <div class="car-card">
     <div class="car-detail">
         <h3>@Model.Make  @Model.Model</h3>
-        <p><strong>Price per day</strong> $@Model.PricePerDay</p>
-        <p><strong>Availibility</strong> @(Model.IsAvailable ?"Available" : "NotAvailable")</p>
-        <h3>Specification</h3>
-
-        <ul>
-            <li><strong>Make:</strong>  @Model.Make</li>
-            <li><strong>Model: </strong> @Model.Model</li>
-            <li><strong>Year: </strong>   @Model.Year</li>
-            <li><strong> Fuel type:</strong> @Model.FuelType </li>
-            <li><strong> Seats:</strong> @Model.Seats</li>
-            <img src="~/images/cars/@Model.ImageUrl" alt="@Model.Make @Model.Model" style="max-width:350px; height:auto;" />
-        </ul>
-        
+        <p><strong>Price per day:</strong> $@Model.PricePerDay</p>
+        <p><strong>Availibility:</strong> @(Model.IsAvailable ?"Available" : "NotAvailable")</p>
+        <a href="@Url.Action("Details","Car", new {id = Model.CarId})" class="btn-view-details">View Details</a>
     </div>
-
+    <img src="~/images/cars/@(string.IsNullOrEmpty(Model.ImageUrl) ? "carImagePlaceholder.jpg": Model.ImageUrl)" alt="@Model.Make @Model.Model" class="car-image" />
 </div>
+       
+<style>
+    .car-card{
+        display: flex;
+        justify-content: space-between;
+        border:1px solid #ddd;
+        padding: 15px;
+        margin: 10px 0;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        align-items: center;
 
+    }
 
+    .car-detail{
+        flex: 1;
+        margin-right: 15px;
 
+    }
 
+    .car-image {
+        width: 150px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+
+    .btn-view-details{
+        display: inline-block;
+        margin-top: 10px;
+        padding: 8px 15px;
+        background-color: #007bff;
+        color: white;
+    }
+</style>
+        
+    

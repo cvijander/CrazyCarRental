@@ -25,6 +25,13 @@
         
     </form>
 
+<div>
+    @foreach (var car in Model)
+    {
+        @await Html.PartialAsync("_CarCard", car)
+    }
+</div>
+
  <div>
       @foreach (Car car in Model)
       {
@@ -37,12 +44,7 @@
       }
  </div>
 
-<div>
-    @foreach (var car in Model)
-    {
-        @await Html.PartialAsync("_CarCard",car)
-    }
-</div>
+
 
 
 <style>
