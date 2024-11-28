@@ -45,10 +45,7 @@ namespace CrazyCarRental.Controllers
             if(booking.EndDate < booking.StartDate)
             {
                 ModelState.AddModelError(nameof(booking.EndDate), "End date must be aftter the start date");
-            }
-
-
-            
+            }                
 
            
 

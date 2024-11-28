@@ -31,11 +31,91 @@
 
          <button type="submit" class="btn btn-primary">Confirm Booking</button>
      </form>
-   
+
+    <div id="messageYear" ></div>
+    <div id="messageMonth" ></div>
+    <div id="messageDay" ></div>
 
      
 
      <div asp-validation-summary ="All" class="validation-summary"></div>
+
+     <script>
+
+          
+
+         let startDate = document.getElementById("StartDate").value;
+         console.log(startDate);
+        console.log(typeof startDate);
+         let endDate = document.getElementById("EndDate").value;
+        console.log(endDate);
+        console.log(typeof endDate);
+         let totalPrice = document.getElementById("TotalPrice").value;
+
+         let startDateYear = parseInt(startDate.substring(0,4));
+         console.log(startDateYear);
+        let startDateMonth = parseInt(startDate.substring(5,7));
+        console.log(startDateMonth);
+        let startDateDay = parseInt(startDate.substring(8,10));
+        console.log(startDateDay);
+
+         console.log(`Startna Godina: ${startDateYear}, Mesec: ${startDateMonth} , Dan: ${startDateDay}`);
+
+        let endDateYear = parseInt(endDate.substring(0, 4));
+        console.log(endDateYear);
+        let endDateMonth = parseInt(endDate.substring(5, 7));
+        console.log(endDateMonth);
+        let endDateDay = parseInt(endDate.substring(8, 10));
+        console.log(endDateDay);
+
+         let messageToUserYear = document.getElementById("messageYear");
+         let messageToUserMonth = document.getElementById("messageMonth");
+         let messageToUserDay = document.getElementById("messageDay");
+
+                    
+         
+
+        if(endDateYear < startDateYear)
+        {
+            console.log("Godina zavrsetka rezervacije ne moze biti pre godine pocetka rezervacije ");
+            messageToUserYear.textContent = "Godina zavrsetka rezervacije ne moze biti pre godine pocetka rezervacije ";
+            messageToUserYear.style.color = "red";
+        }
+        else (endDateYear >= startDateYear)
+        {
+            console.log("Godina zavrsetka rezervacije je ista ili veca od godine pocetka rezervacije ");
+            messageToUserYear.textContent = "Godina zavrsetka rezervacije je ista ili veca od godine pocetka rezervacije ";
+            messageToUserYear.style.color = "green";
+        }
+
+        if (endDateMonth < startDateMonth) {
+            console.log("Mesec zavrsetka rezervacije ne moze biti pre meseca pocetka rezervacije ");
+            messageToUserMonth.textContent = "Mesec zavrsetka rezervacije ne moze biti pre meseca pocetka rezervacije ";
+            messageToUserMonth.style.color = "red";
+        }
+        else (endDateMonth >= startDateMonth)
+        {
+            console.log("Msec zavrsetka rezervacije je isti ili veci od meseca pocetka rezervacije ");
+            messageToUserMonth.textContent = "Msec zavrsetka rezervacije je isti ili veci od meseca pocetka rezervacije ";
+            messageToUserMonth.style.color = "green";
+        }
+
+        if (endDateDay < startDateDay) {
+            console.log("Dan zavrsetka rezervacije ne moze biti pre dana pocetka rezervacije ");
+            messageToUserDay.textContent = "Dan zavrsetka rezervacije ne moze biti pre dana pocetka rezervacije ";
+            messageToUserDay.style.color = "red";
+        }
+        else (endDateDay >= startDateDay)
+        {
+            console.log("Dan zavrsetka rezervacije je isti ili veci od dana pocetka rezervacije ");
+            messageToUserDay.textContent = "Dan zavrsetka rezervacije je isti ili veci od dana pocetka rezervacije ";
+            messageToUserDay.style.color = "green";
+        }
+
+     
+     
+
+     </script>
 
      <style>
          body{
