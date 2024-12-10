@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace CrazyCarRental
 {
     public class Program
@@ -8,6 +10,8 @@ namespace CrazyCarRental
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddDbContext<CarRentalContext>(
+                op => op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             var app = builder.Build();
 

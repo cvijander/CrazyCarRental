@@ -6,7 +6,13 @@ namespace CrazyCarRental.Controllers
 {
     public class BookingController : Controller
     {
-        
+        private readonly CarRentalContext _context;
+
+        public BookingController(CarRentalContext context)
+        {
+            _context = context;
+        }
+
         public async Task<IActionResult>Create(int carId, int userId)
         {
             IEnumerable<Car> cars = Garage.GenerateCars();

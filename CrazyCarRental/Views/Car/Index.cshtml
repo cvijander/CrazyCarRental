@@ -19,6 +19,9 @@
 
         <label for="maxPrice">Max price</label>
         <input type="number" name="maxPrice" id="maxPrice" step="0.01" value="@Context.Request.Query["maxPrice"]"/>
+
+        <input type="hidden" name="pageCount" id="pageCount" value="@Context.Request.Query["pageCount"]"/>
+        <input type="hidden" name="pageSize" id="pageSize" value="@Context.Request.Query["pageSize"]"/>
             
         
         <button type="submit" class="btn btn-primary" >Search </button>

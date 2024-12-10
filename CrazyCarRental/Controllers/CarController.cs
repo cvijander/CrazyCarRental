@@ -6,11 +6,22 @@ namespace CrazyCarRental.Controllers
 {
     public class CarController : Controller
     {
-        public IActionResult Index(string make, string model, decimal? minPrice, decimal? maxPrice)
+        private readonly CarRentalContext _context;
+
+        public CarController(CarRentalContext context)
         {
-            var cars = Garage.GenerateCars();
+            _context = context;
+        }
+
+        public async Task<IActionResult> Index(string make, string model, decimal? minPrice, decimal? maxPrice, int pageCount, int pageSize = 10)
+        {
+            var cars =_context.Cars.AsQueryable();
+
+           // var cars = Garage.GenerateCars();
 
            // cars = cars.Where(c => c.Make == make && c.Model == model);
+
+            
 
             if(make != null)
             {
@@ -32,6 +43,7 @@ namespace CrazyCarRental.Controllers
                 cars = cars.Where(c => c.PricePerDay <= maxPrice);
             }
 
+            cars = cars.Skip(pageSize * pageCount).Take(pageSize);
 
             return View(cars);
         }
@@ -39,10 +51,12 @@ namespace CrazyCarRental.Controllers
         
 
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            var cars = Garage.GenerateCars();
-            var car = cars.SingleOrDefault(x => x.CarId == id);
+            var car = await _context.Cars.FindAsync(id);
+
+           // var cars = Garage.GenerateCars();
+           // var car = cars.SingleOrDefault(x => x.CarId == id);
 
             if (car == null) return NotFound();
                         
