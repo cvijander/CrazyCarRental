@@ -3,6 +3,7 @@ using CrazyCarRental.Service;
 using CrazyCarRental.Util;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using System.IO;
 
 namespace CrazyCarRental.Controllers
@@ -32,7 +33,7 @@ namespace CrazyCarRental.Controllers
         }
 
 
-        public async Task<IActionResult> Index(string make, string model, int? minPrice, int? maxPrice, int pageCount = 1 , int pageSize = 10)
+        public async Task<IActionResult> Index(string make, string model, int? minPrice, int? maxPrice, int page = 1 )
         {
             //var cars =_context.Cars.AsQueryable();
 
@@ -63,9 +64,24 @@ namespace CrazyCarRental.Controllers
             //    cars = cars.Where(c => c.PricePerDay <= maxPrice);
             //}
 
-           cars = cars.Skip(pageSize * pageCount).Take(pageSize);
+            var pageSize = 9;
 
-            return View(cars);
+          
+
+            PaginatedCarsViewModel pcvm = new PaginatedCarsViewModel();
+
+            pcvm.PageSize = pageSize;
+           
+            pcvm.CurrentPage = page;
+            pcvm.TotalPages = cars.Count() / pageSize;
+            pcvm.HasNextPage = pcvm.TotalPages > pcvm.CurrentPage;
+
+            cars = cars.Skip(pageSize * (page - 1)).Take(pageSize);
+
+            pcvm.Cars = cars;
+
+
+            return View(pcvm);
         }
 
         

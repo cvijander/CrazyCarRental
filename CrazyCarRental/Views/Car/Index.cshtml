@@ -1,5 +1,6 @@
 ﻿
-@model IEnumerable<CrazyCarRental.Models.Car>
+   
+   @model CrazyCarRental.Models.PaginatedCarsViewModel
 
 @{
     ViewData["Title"] = "View a list of Cars";
@@ -29,7 +30,7 @@
     </form>
 
 <div>
-    @foreach (var car in Model)
+    @foreach (var car in Model.Cars)
     {
         @await Html.PartialAsync("_CarCard", car)
     }
@@ -48,6 +49,19 @@
                </div>
             }
        </div> *@
+
+       <div>
+           <input type="hidden" name="pageCount" id="pageCount" value="@Context.Request.Query["pageCount"]" />
+           @if(Model.HasNextPage)
+           {
+             <a href="@Url.Action("Index","Car", new {  page = (Model.CurrentPage + 1).ToString() })">Next</a>
+           }
+            
+           <input type="hidden" name="pageSize" id="pageSize" value="@Context.Request.Query["pageSize"]" />
+           <a>Previous</a>
+       </div>
+       @* zavrsti se kroz for petlju od 1 do total pages i pokazi mi sve linkove, a na onoj stranici koja je trenutna da ne bude link, nego samo tekst da bi bilo user frindel  *@
+       @* if link = current page  nemoj da mi furas link *@
 
 
 
