@@ -1,23 +1,35 @@
 ﻿using CrazyCarRental.Models;
+using CrazyCarRental.Service;
 using CrazyCarRental.Util;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CrazyCarRental.Controllers
 {
     public class BookingController : Controller
     {
-        private readonly CarRentalContext _context;
+       // private readonly CarRentalContext _context;
 
-        public BookingController(CarRentalContext context)
+        private readonly IBookingService _bookingService;
+        private readonly ICarService _carService;
+        //public BookingController(CarRentalContext context)
+        //{
+        //    _context = context;
+        //}
+        public BookingController(IBookingService bookingService)
         {
-            _context = context;
+            _bookingService = bookingService;
         }
 
         public async Task<IActionResult>Create(int carId, int userId)
         {
-            IEnumerable<Car> cars = Garage.GenerateCars();
+           // var car = await _context.Cars.SingleOrDefaultAsync(x => x.CarId == carId);
 
-            Car car = cars.Single(x => x.CarId == carId);
+            var car =_carService.GetCarById(carId);
+
+           // IEnumerable<Car> cars = Garage.GenerateCars();
+
+           // Car car = cars.Single(x => x.CarId == carId);
 
 
             if(car == null || !car.IsAvailable)
@@ -26,7 +38,7 @@ namespace CrazyCarRental.Controllers
             }
 
             
-            return View(new Booking { BookingId=1, CarId = carId, Car = car, StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1),TotalPrice = car.PricePerDay  });
+            return View( new Booking { BookingId=1, CarId = carId, Car = car, StartDate = DateTime.Now, EndDate = DateTime.Now.AddDays(1),TotalPrice = car.PricePerDay  });
         }
 
         [HttpPost]
@@ -34,9 +46,14 @@ namespace CrazyCarRental.Controllers
 
         public async Task< IActionResult> Create(Booking booking)
         {
-            IEnumerable<Car> cars = Garage.GenerateCars();
 
-            Car car = cars.SingleOrDefault(x => x.CarId == booking.CarId);
+            var car =_carService.GetCarById(booking.CarId);
+
+           // var car = await _context.Cars.SingleOrDefaultAsync(x => x.CarId == booking.CarId);
+
+           // IEnumerable<Car> cars = Garage.GenerateCars();
+
+            //Car car = cars.SingleOrDefault(x => x.CarId == booking.CarId);
 
             if(car == null || !car.IsAvailable )
             {

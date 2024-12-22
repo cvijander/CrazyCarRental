@@ -35,17 +35,19 @@
     }
 </div>
 
- <div>
-      @foreach (Car car in Model)
-      {
-         <div class="car-card">
-             <h2>@car.Make  @car.Model</h2>
-             <p>Price per day : @car.PricePerDay euro </p>
-             <p>@(car.IsAvailable ? "Available" : "Not Available")</p>
-             <a href="@Url.Action("Details", "Car",new {id = car.CarId })">View Details</a>             
-         </div>
-      }
- </div>
+
+
+   @*   <div>
+            @foreach (Car car in Model)
+            {
+               <div class="car-card">
+                   <h2>@car.Make  @car.Model</h2>
+                   <p>Price per day : @car.PricePerDay euro </p>
+                   <p>@(car.IsAvailable ? "Available" : "Not Available")</p>
+                   <a href="@Url.Action("Details", "Car",new {id = car.CarId })">View Details</a>             
+               </div>
+            }
+       </div> *@
 
 
 

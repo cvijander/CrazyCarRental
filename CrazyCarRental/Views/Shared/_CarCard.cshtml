@@ -5,7 +5,9 @@
         <h3>@Model.Make  @Model.Model</h3>
         <p><strong>Price per day:</strong> $@Model.PricePerDay</p>
         <p><strong>Availibility:</strong> @(Model.IsAvailable ?"Available" : "NotAvailable")</p>
-        <a href="@Url.Action("Details","Car", new {id = Model.CarId})" class="btn-view-details">View Details</a>
+        <a href="@Url.Action("Details","Car", new {id = Model.CarId})" class="btn-view-details">View Details</a>        
+        <a asp-controller="Car" asp-action="Edit" asp-route-id="@Model.CarId" class="btn-edit-car">Edit</a>
+
     </div>
     <img src="~/images/cars/@(string.IsNullOrEmpty(Model.ImageUrl) ? "carImagePlaceholder.jpg": Model.ImageUrl)" alt="@Model.Make @Model.Model" class="car-image" />
 </div>
@@ -42,6 +44,14 @@
         margin-top: 10px;
         padding: 8px 15px;
         background-color: #007bff;
+        color: white;
+    }
+
+    .btn-edit-car {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 8px 15px;
+        background-color: green;
         color: white;
     }
 </style>

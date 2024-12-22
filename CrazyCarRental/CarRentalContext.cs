@@ -7,6 +7,12 @@ namespace CrazyCarRental
     public class CarRentalContext : DbContext
     {
 
+        public static readonly ILoggerFactory loggerFactory = Microsoft.Extensions.Logging.LoggerFactory.Create(builder =>
+        {
+           builder.AddConsole();
+            });
+
+
         public CarRentalContext(DbContextOptions<CarRentalContext> options) :base(options) { }
 
         public DbSet<Car> Cars { get;set; }

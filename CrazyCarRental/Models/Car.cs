@@ -23,9 +23,10 @@ namespace CrazyCarRental.Models
         [Required]
         public int Year { get; set; }
 
+        [Range(1,5)]
         public int Seats { get; set; }
 
         public string FuelType { get; set; }
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
     }
 }

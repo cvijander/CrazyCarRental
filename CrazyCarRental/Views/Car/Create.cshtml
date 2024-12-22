@@ -1,0 +1,120 @@
+﻿@model CrazyCarRental.Models.Car
+
+
+
+<h1><i class="bi bi-plus-cirlce"></i>Kreirajte nov automobil</h1>
+
+<form asp-action="Create" method="post" enctype="multipart/form-data">
+
+   <div>
+       <label asp-for="Make">
+           <i class="bi bi-car-front-fill"></i>Marka automobila
+       </label>
+       <input asp-for="Make" type="text" required class="form-control" />
+       <span asp-validation-for="Make" class="text-danger"></span>
+   </div>
+
+    <div>
+        <label asp-for="Model">
+            <i class="bi bi-tags-fill"></i>Model automobila
+        </label>
+        <input asp-for="Model" type="text" required class="form-control" />
+        <span asp-validation-for="Model" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="PricePerDay">
+            <i class="bi bi-cash-coin"></i>Cena po danu
+        </label>
+        <input asp-for="PricePerDay" type="number" required class="form-control" />
+        <span asp-validation-for="PricePerDay" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="IsAvailable">
+             <i class="bi bi-check-circle-fill"></i>Dostupan 
+        </label>
+        <input asp-for="IsAvailable" type="checkbox"  />
+        <span asp-validation-for="IsAvailable" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="Year">
+            <i class="bi bi-calendar-event-fill"></i>Godina proizvodnje
+        </label>
+        <select asp-for="Year"   required class="form-control" >
+            <option value="">--- odaberite godiste iz liste ---  </option>
+            <option value="1990">1990 </option>
+            <option value="1992">1992 </option>
+            <option value="1994">1994 </option>
+            <option value="1995">1995 </option>
+            <option value="1996">1996 </option>            
+            <option value="2000">2000 </option>
+            <option value="2005">2005 </option>
+            <option value="2015">2015 </option>
+            <option value="2020">2020 </option>    
+        </select>
+        <span asp-validation-for="Year" class="text-danger"></span>
+    </div>
+
+    
+     <div>
+         <label asp-for="Seats" class="form-label">
+             <i class="bi bi-person-fill"></i>Broj sedista
+         </label>
+         <input asp-for="Seats" type="number" required  class="form-control" />
+         <span asp-validation-for="Seats" class="text-danger"></span>
+     </div>
+
+    
+
+    <div>
+        <div class="form-group">
+            <label asp-for="FuelType">Odaberite vrstu goriva :</label>
+            <div>
+                <div>
+                    <input asp-for="FuelType" type="radio" value="Petrol" name="FuelType" />
+                    <label asp-for="FuelType">
+                        <i class="bi bi-fuel-pump"></i> Petrol                       
+                    </label>
+                </div>
+                <div>
+                    <input asp-for="FuelType" type="radio" value="Diesel" name="FuelType" />
+                    <label asp-for="FuelType">
+                        <i class="bi bi-fuel-pump-diesel"></i>Diesel
+                    </label>
+                </div>
+                <div>
+                    <input asp-for="FuelType" type="radio" value="Hybrid" name="FuelType" />
+                    <label asp-for="FuelType">
+                        <i class="bg-info bi-tree"></i>Hybrid                        
+                    </label>
+                </div>
+                <div>
+                    <input asp-for="FuelType" type="radio" value="Electric" name="FuelType" />
+                    <label asp-for="FuelType">
+                        <i class="bi bi-ev-station"></i>Electric
+                    </label>
+                </div>        
+            </div>         
+            <span asp-validation-for="FuelType" class="text-danger"></span>
+            
+        </div>
+    </div>
+
+    <div>
+        <label asp-for="ImageUrl">
+            <i class="bi bi-image"></i>Dodajte sliku
+        </label>
+        <input asp-for="ImageUrl" type="file"  name="file"  class="form-control"/>
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        
+    </div>
+
+    <button type="submit" class="btn btn-primary">Dodaj automobil</button>
+
+
+</form>
+
+
+

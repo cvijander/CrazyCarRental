@@ -1,3 +1,4 @@
+using CrazyCarRental.Service;
 using Microsoft.EntityFrameworkCore;
 
 namespace CrazyCarRental
@@ -11,7 +12,16 @@ namespace CrazyCarRental
             // Add services to the container.
             builder.Services.AddControllersWithViews();
             builder.Services.AddDbContext<CarRentalContext>(
-                op => op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+                op => op.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+                .EnableSensitiveDataLogging().LogTo(Console.WriteLine, LogLevel.Information));
+
+
+            builder.Services.AddScoped<ICarService,CarService>();
+            builder.Services.AddScoped<IBookingService, BookingService>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+            
+
 
             var app = builder.Build();
 
