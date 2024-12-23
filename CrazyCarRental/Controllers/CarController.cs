@@ -75,7 +75,7 @@ namespace CrazyCarRental.Controllers
             pcvm.CurrentPage = page;
             pcvm.TotalPages = cars.Count() / pageSize;
             pcvm.HasNextPage = pcvm.TotalPages > pcvm.CurrentPage;
-
+            pcvm.HasPreviousPage = pcvm.CurrentPage > 1;
             cars = cars.Skip(pageSize * (page - 1)).Take(pageSize);
 
             pcvm.Cars = cars;
